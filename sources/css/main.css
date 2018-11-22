@@ -56,3 +56,29 @@
     background: url("/SoccerNoid/sources/img/Soccernoid-Logo.PNG") no-repeat center center;
     background-size: 80% 80%;
 }
+
+/** css für selectTeam**/
+.selectHeader{
+    width: 100%;
+    height: 15%;
+    background-color: black;
+    float: left;
+}
+.selectUsername{
+    width: 50%;
+    height: 70%;
+    float: left;
+    background-color: blue;
+}
+.selectTeam{
+    width: 50%;
+    height: 70%;
+    float: right;
+    background-color: red;
+}
+.selectStart{
+    width: 100%;
+    height: 15%;
+    float: left;
+    background-color: green;
+}
