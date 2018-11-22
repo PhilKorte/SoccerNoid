@@ -5,7 +5,7 @@
     background-color: yellow;
 }
 .gameLeft{
-    width: 10%;
+    width: 5%;
     height: 90%;
     float: left;
     background-color: black; 
@@ -17,7 +17,7 @@
     background-color: green;
 }
 .gameScore{
-    width: 40%;
+    width: 45%;
     height: 90%;
     float: right;
     background-color: darkgrey;
