@@ -1,3 +1,11 @@
+/**css allgemein**/
+html{
+    height: 100%
+}
+body{
+    height: 97%;
+}
+/**css für game.html**/
 .gameHeader{
     width: 100%;
     height: 5%;
@@ -28,4 +36,85 @@
     height: 5%;
     float: left;
     background-color: darkgrey;
+}
+
+/** css für Startseite **/
+.startMain{
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+.button{
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    font-size: 5vh;
+    color: white;
+    font-style: italic;
+    font-family: monospace;
+    text-align: center;
+}
+.buttonInside{
+    width: 30%;
+    height: 15%;
+    float: right;
+}
+.startLogoInside{
+    width: 100%;
+    height: 80%;
+    background: url("/SoccerNoid/sources/img/Soccernoid-Logo.PNG") no-repeat center center;
+    background-size: 80% 80%;
+}
+
+/** css für selectTeam**/
+.selectHeader{
+    width: 100%;
+    height: 15%;
+    float: left;
+}
+.selectUsername{
+    width: 50%;
+    height: 70%;
+    float: left;
+    background-color: grey;
+}
+.selectTeam{
+    width: 50%;
+    height: 70%;
+    float: right;
+    background-color: red;
+}
+.selectStart{
+    width: 100%;
+    height: 15%;
+    float: left;
+    background-color: green;
+}
+.selectLogoInside{
+    background-image: url("/SoccerNoid/sources/img/Soccernoid-Logo.PNG");
+    background-size: 100% 100%;
+    height: 100%;
+    width: 35%;
+    float: left;
+}
+.selectHeaderText{
+    font-size: 6vh;
+    color: red;
+    font-style: italic;
+    font-family: monospace;
+    text-align: center;
+    float: right;
+    height: 100%;
+    width: 65%;
+    line-height: 6vw;
+}
+.selectUserText{
+    width: 100%;
+    height: 70%;
+    text-align: center;
+    font-size: 6vh;
+    color: black;
+    font-style: italic;
+    font-family: monospace;
+    text-align: center;
 }
