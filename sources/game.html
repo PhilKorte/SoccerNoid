@@ -28,7 +28,11 @@
             var ballRadius = 10;
             var ballX = canvas.width/2;
             var ballY = canvas.height/2;
-                          
+            var score = 0;
+            var lives = 3;
+            var directionX = 1;
+            var directionY = 1;
+
             setTimeout(draw, 40);              
             draw();
             document.addEventListener("mousemove", mouseMoveHandler, false);
@@ -36,16 +40,27 @@
             function mouseMoveHandler(e) {
             var positionX = e.clientX - canvas.offsetLeft - paddleWidth/2;
             if(positionX > 0 && positionX < canvas.width) {
-            paddleX = positionX ; 
+                    paddleX = positionX ; 
             }
                  if(positionX < 0){
-             paddleX = 0 ;
+                    paddleX = 0 ;
             }
                 if(positionX + paddleWidth > canvas.width){
-             paddleX = canvas.width -paddleWidth;
+                    paddleX = canvas.width -paddleWidth;
             }
             }
 
+            function drawScore() {
+             ctx.font = "16px Arial";
+             ctx.fillStyle = "darkgreen";
+             ctx.fillText("Score: "+score, 20, 13);
+            }
+
+            function drawLives() {
+             ctx.font = "16px Arial";
+             ctx.fillStyle = "darkgreen";
+             ctx.fillText("Lives: "+lives, canvas.width-75, 13);
+            }
            function drawPaddle(){
                ctx.beginPath();
                ctx.rect(paddleX, paddleY, paddleWidth, paddleHeight);
@@ -59,15 +74,33 @@
                ctx.arc(ballX, ballY, ballRadius, 0, Math.PI*2);
                ctx.fillStyle = "darkgreen";
                ctx.fill();
-               ctx.closePath();
+               ctx.closePath();   
+               setTimeout(bounceBall, 40);               
            }
 
            function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             drawPaddle();
             drawBall();
+            drawScore();
+            drawLives();
             
             requestAnimationFrame(draw);
+           }
+
+           function bounceBall(){
+            ctx.clearRect(0,0,canvas.width, canvas.height);
+            ballX += 5 * directionX;
+            ballY += 5 * directionY;
+            if(ballX + 40 >= canvas.width || ballY -40 <= 0){
+            directionX *= -1;
+        }
+            if(ballY + 40 >= canvas.height || ballY - 40 <= 0 ){
+            directionY *= -1;
+        }
+            drawBall();
+            drawPaddle();
+            
            }
 
             
