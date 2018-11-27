@@ -10,19 +10,20 @@ body{
     width: 100%;
     height: 5%;
     float: left;
-    background-color: yellow;
+    background-color: darkgrey;
 }
 .gameLeft{
     width: 5%;
     height: 90%;
     float: left;
-    background-color: black; 
+    background-color:darkgrey; 
 }
 .gameGround{
     width: 50%;
     height: 90%;
     float: left;
-    background-color: green;
+    background-image: url("/SoccerNoid/sources/img/ground.png");
+    background-size: 100% 100%;
 }
 .gameScore{
     width: 45%;
@@ -34,7 +35,7 @@ body{
     width: 100%;
     height: 5%;
     float: left;
-    background-color: darkred;
+    background-color: darkgrey;
 }
 
 /** css für Startseite **/

@@ -12,7 +12,67 @@
         <div class="gameLeft">
 
         </div>
-        <div class="gameGround">
+        <div id="cnt" class="gameGround">
+
+            <canvas id= "ourPlayground"  > </canvas>
+           
+            <script>
+            var canvas = document.getElementById("ourPlayground");
+            var ctx = canvas.getContext("2d");
+            var container = document.getElementById("cnt");
+            canvas.width = container.offsetWidth;
+            canvas.height = container.offsetHeight;
+            var paddleHeight = 10;
+            var paddleWidth = 60;
+            var paddleX = 300;
+            var paddleY = canvas.height * 0.85;
+            var ballRadius = 10;
+            var ballX = canvas.width/2;
+            var ballY = canvas.height/2;
+                          
+            setTimeout(draw, 40);              
+            draw();
+            document.addEventListener("mousemove", mouseMoveHandler, false);
+
+            function mouseMoveHandler(e) {
+            var positionX = e.clientX - canvas.offsetLeft - paddleWidth/2;
+            if(positionX > 0 && positionX < canvas.width) {
+            paddleX = positionX ; 
+            }
+                 if(positionX < 0){
+             paddleX = 0 ;
+            }
+                if(positionX + paddleWidth > canvas.width){
+             paddleX = canvas.width -paddleWidth;
+            }
+            }
+
+           function drawPaddle(){
+               ctx.beginPath();
+               ctx.rect(paddleX, paddleY, paddleWidth, paddleHeight);
+               ctx.fillStyle = "darkgreen";
+               ctx.fill();
+               ctx.closePath();
+           }
+           
+           function drawBall(){
+               ctx.beginPath();
+               ctx.arc(ballX, ballY, ballRadius, 0, Math.PI*2);
+               ctx.fillStyle = "darkgreen";
+               ctx.fill();
+               ctx.closePath();
+           }
+
+           function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawPaddle();
+            drawBall();
+            
+            requestAnimationFrame(draw);
+           }
+
+            
+            </script>
         
         </div>
         <div class="gameScore">
