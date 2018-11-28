@@ -9,6 +9,7 @@ window.onload = function(){
 
     var username = "";
     var userteam = "Kein Team ausgesucht";
+    var json;
 
     //logic
     inputteam.value = userteam;
@@ -25,8 +26,18 @@ window.onload = function(){
         inputteam.value = userteam;
     });
     buttonNext.addEventListener("click", function(event){
-        console.log("button clicked");
+        username = inputname.value;
+        userteam = inputteam.value;
+        if(username == "" || userteam == "Kein Team ausgesucht"){
+            alert("Please select username and team!");
+            return;
+        } 
+        userinit(username, userteam);
         window.location.href="/SoccerNoid/sources/game.html";
      });
     //declare functions
+     function userinit(name, team){
+        var obj = {"name": name, "team": team};
+        localStorage.setItem('userinitStorage', JSON.stringify(obj));
+     }
 }
