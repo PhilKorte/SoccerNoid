@@ -5,6 +5,11 @@ window.onload = function(){
         console.log("button clicked");
         window.location.href="/SoccerNoid/sources/selectTeam.html";
  });
+ var button2 = document.getElementById("startEndSite");
+ button2.addEventListener("click", function(event){
+      console.log("button clicked");
+      window.location.href="/SoccerNoid/sources/end.html";
+});
     //logic
 
 
