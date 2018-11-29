@@ -34,6 +34,7 @@
             var directionY = 1;
             var rightPressed = false;
             var leftPressed = false;
+            var keyboardX = 0;
 
              
             draw();
@@ -44,9 +45,11 @@
             function keyDownHandler(e){
                 if(e.keyCode == 39){
                     rightPressed == true; 
+                    paddleX = paddleX + 20;
                 }
                 else if(e.keyCode == 37){
                     leftPressed == true; 
+                    paddleX = paddleX - 20;
                 }
             }
 
@@ -84,12 +87,13 @@
              ctx.fillText("Lives: "+lives, canvas.width-75, 13);
             }
            function drawPaddle(){
+            
                ctx.beginPath();
-               ctx.rect(paddleX, paddleY, paddleWidth, paddleHeight);
+               ctx.rect(paddleX + keyboardX, paddleY, paddleWidth, paddleHeight);
                ctx.fillStyle = "darkgreen";
                ctx.fill();
                ctx.closePath();
-               paddleKeyboard();
+              
            }
            
            function drawBall(){
@@ -136,12 +140,8 @@
             }
            }
 
-           function paddleKeyboard(){
-                       
-            if(leftPressed && paddleX > 0){
-                paddleX -= 7;
-            }
-           }
+          
+           
 
             
             </script>
