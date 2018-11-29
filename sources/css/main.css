@@ -153,3 +153,16 @@ body{
     background: url("/SoccerNoid/sources/img/teams/flag_turkey.jpg");
     background-size: 100% 100%;
 }
+/** css für Gameover **/
+.startMainGameOver{
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+
+.startLogoGameOver{
+    width: 100%;
+    height: 80%;
+    background: url("/SoccerNoid/sources/img/Gameover.PNG") no-repeat center center;
+    background-size: 80% 80%;
+}
