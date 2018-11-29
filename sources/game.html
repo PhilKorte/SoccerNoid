@@ -12,6 +12,7 @@
 
         </div>
         <div id="cnt" class="gameGround">
+            <img src="/SoccerNoid/sources/img/ball.png" style="display: none;" id = "ballImage" >
 
             <canvas id= "ourPlayground"  > </canvas>
            
@@ -34,7 +35,8 @@
             var directionY = 1;
             var rightPressed = false;
             var leftPressed = false;
-            var keyboardX = 0;
+            var keyboardSpeed = 20;
+            
 
              
             draw();
@@ -45,22 +47,21 @@
             function keyDownHandler(e){
                 if(e.keyCode == 39){
                     rightPressed == true; 
-                    paddleX = paddleX + 20;
+                    paddleX = paddleX + keyboardSpeed;
+                    if(paddleX + paddleWidth > canvas.width){
+                    paddleX = canvas.width -paddleWidth;
+            }
                 }
                 else if(e.keyCode == 37){
                     leftPressed == true; 
-                    paddleX = paddleX - 20;
-                }
+                    paddleX = paddleX - keyboardSpeed;
+                    if(paddleX < 0){
+                    paddleX = 0 ;
             }
-
-            function keyUpHandler(e){
-                if(e.keyCode == 39){
-                    rightPressed == false;
-                }
-                else if(e.keyCode == 37){
-                    leftPressed == false;
-                }
-            }
+                
+        }
+    }
+            
 
             function mouseMoveHandler(e) {
             var positionX = e.clientX - canvas.offsetLeft - paddleWidth/2;
@@ -89,19 +90,16 @@
            function drawPaddle(){
             
                ctx.beginPath();
-               ctx.rect(paddleX + keyboardX, paddleY, paddleWidth, paddleHeight);
-               ctx.fillStyle = "darkgreen";
+               ctx.rect(paddleX, paddleY, paddleWidth, paddleHeight);
+               ctx.fillStyle = "black";
                ctx.fill();
                ctx.closePath();
               
            }
            
            function drawBall(){
-               ctx.beginPath();
-               ctx.arc(ballX, ballY, ballRadius, 0, Math.PI*2);
-               ctx.fillStyle = "darkgreen";
-               ctx.fill();
-               ctx.closePath();   
+               var image = document.getElementById("ballImage");
+               ctx.drawImage(image, ballX,ballY, 2*ballRadius,2*ballRadius);
                moveBall();              
            }
 
@@ -118,19 +116,19 @@
            function moveBall(){
             ballX += 5 * directionX;
             ballY += 5 * directionY;
-            if(ballX + ballRadius >= canvas.width || ballX -ballRadius <= 0){
+            if(ballX + 2*ballRadius >= canvas.width || ballX  <= 0){
             directionX *= -1;
         }
-            if( ballY - ballRadius <= 0 ){
+            if( ballY  <= 0 ){
             directionY *= -1;
         }
-            if(ballY + ballRadius >= paddleY && ballY - ballRadius <= paddleY + paddleHeight && ballX - ballRadius >= paddleX  && ballX + ballRadius <= paddleX + paddleWidth){
+            if(ballY + 2* ballRadius >= paddleY && ballY  <= paddleY + paddleHeight && ballX  >= paddleX  && ballX + 2*ballRadius <= paddleX + paddleWidth){
                 directionY *= -1;
             } 
-            else if(ballX + ballRadius >= paddleX && ballX - ballRadius <= paddleX + paddleWidth && ballY - ballRadius <= paddleY + paddleHeight && ballY + ballRadius >= paddleY){
+            else if(ballX + 2* ballRadius >= paddleX && ballX <= paddleX + paddleWidth && ballY  <= paddleY + paddleHeight && ballY + 2*ballRadius >= paddleY){
                 directionX *= -1;
             }
-            else if(ballY + ballRadius >= canvas.height){
+            else if(ballY + 2*ballRadius >= canvas.height){
                 lives --;
                 ballX = canvas.width/2;
                 ballY = canvas.height/2;
