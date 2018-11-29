@@ -54,10 +54,15 @@ body{
     font-family: monospace;
     text-align: center;
 }
-.buttonInside{
+.buttonSelect{
     width: 30%;
     height: 15%;
     float: right;
+}
+.buttonEnd{
+    width: 30%;
+    height: 15%;
+    float: left;
 }
 .startLogoInside{
     width: 100%;
@@ -73,22 +78,21 @@ body{
     float: left;
 }
 .selectUsername{
-    width: 50%;
+    width: 49%;
     height: 70%;
     float: left;
-    background-color: grey;
+    border: 1px solid red;
 }
 .selectTeam{
-    width: 50%;
+    width: 49%;
     height: 70%;
     float: right;
-    background-color: red;
+    border: 1px solid red;
 }
 .selectStart{
     width: 100%;
     height: 15%;
     float: left;
-    background-color: green;
 }
 .selectLogoInside{
     background-image: url("/SoccerNoid/sources/img/Soccernoid-Logo.PNG");
@@ -110,11 +114,42 @@ body{
 }
 .selectUserText{
     width: 100%;
-    height: 70%;
+    height: 40%;
     text-align: center;
     font-size: 6vh;
     color: black;
     font-style: italic;
     font-family: monospace;
     text-align: center;
+}
+.textarea{
+    width: 95%;
+    height: 25%;
+    display: block;
+    margin : 0 auto;
+    font-size: x-large;
+}
+.selectUserInput{
+    width: 100%;
+    height: 30%;
+}
+.selectUserTeam{
+    width: 100%;
+    height: 30%
+}
+.selectButton{
+    width: 100%;
+    height: 33%;
+}
+.team1{
+    background: url("/SoccerNoid/sources/img/teams/flag_germany.jpg");
+    background-size: 100% 100%;
+}
+.team2{
+    background: url("/SoccerNoid/sources/img/teams/flag_italiy.jpg");
+    background-size: 100% 100%;
+}
+.team3{
+    background: url("/SoccerNoid/sources/img/teams/flag_turkey.jpg");
+    background-size: 100% 100%;
 }
