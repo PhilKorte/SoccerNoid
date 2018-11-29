@@ -95,12 +95,11 @@
            
            function drawBall(){
                ctx.beginPath();
-
                ctx.arc(ballX, ballY, ballRadius, 0, Math.PI*2);
                ctx.fillStyle = "darkgreen";
                ctx.fill();
                ctx.closePath();   
-               setTimeout(bounceBall, 40);               
+               setTimeout(moveBall, 40);               
            }
 
            function draw() {
@@ -110,21 +109,26 @@
             drawScore();
             drawLives();
             
-            requestAnimationFrame(draw);
+            //requestAnimationFrame(draw);
+            setTimeout(draw,40);
            }
 
-           function bounceBall(){
+           function moveBall(){
             ctx.clearRect(0,0,canvas.width, canvas.height);
-           // ballX += 5 * directionX;
-           // ballY += 5 * directionY;
-            //if(ballX + 40 >= canvas.width || ballY -40 <= 0){
-           // directionX *= -1;
-        //}
-            //if(ballY + 40 >= canvas.height || ballY - 40 <= 0 ){
-          //  directionY *= -1;
-        //}
-            drawBall();
-            drawPaddle();
+            ballX += 5 * directionX;
+            ballY += 5 * directionY;
+            if(ballX + ballRadius >= canvas.width || ballX -ballRadius <= 0){
+            directionX *= -1;
+        }
+            if(ballY + ballRadius >= canvas.height || ballY - ballRadius <= 0 ){
+            directionY *= -1;
+        }
+            if(ballY + ballRadius >= paddleY && ballY + ballRadius < paddleY + paddleHeight && ballX - ballRadius >= paddleX - paddleWidth/2 && ballX + ballRadius <= paddleX + paddleWidth/2){
+                directionY *= -1;
+            }
+            
+            
+            
             
            }
 
