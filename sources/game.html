@@ -34,10 +34,8 @@
             var directionY = 1;
             var rightPressed = false;
             var leftPressed = false;
-            
-          
 
-            setTimeout(draw, 40);              
+             
             draw();
             document.addEventListener("mousemove", mouseMoveHandler, false);
             document.addEventListener("keydown", keyDownHandler, false);
@@ -91,6 +89,7 @@
                ctx.fillStyle = "darkgreen";
                ctx.fill();
                ctx.closePath();
+               paddleKeyboard();
            }
            
            function drawBall(){
@@ -99,7 +98,7 @@
                ctx.fillStyle = "darkgreen";
                ctx.fill();
                ctx.closePath();   
-               setTimeout(moveBall, 40);               
+               moveBall();              
            }
 
            function draw() {
@@ -109,27 +108,39 @@
             drawScore();
             drawLives();
             
-            //requestAnimationFrame(draw);
             setTimeout(draw,40);
            }
 
            function moveBall(){
-            ctx.clearRect(0,0,canvas.width, canvas.height);
             ballX += 5 * directionX;
             ballY += 5 * directionY;
             if(ballX + ballRadius >= canvas.width || ballX -ballRadius <= 0){
             directionX *= -1;
         }
-            if(ballY + ballRadius >= canvas.height || ballY - ballRadius <= 0 ){
+            if( ballY - ballRadius <= 0 ){
             directionY *= -1;
         }
-            if(ballY + ballRadius >= paddleY && ballY + ballRadius < paddleY + paddleHeight && ballX - ballRadius >= paddleX - paddleWidth/2 && ballX + ballRadius <= paddleX + paddleWidth/2){
+            if(ballY + ballRadius >= paddleY && ballY - ballRadius <= paddleY + paddleHeight && ballX - ballRadius >= paddleX  && ballX + ballRadius <= paddleX + paddleWidth){
                 directionY *= -1;
+            } 
+            else if(ballX + ballRadius >= paddleX && ballX - ballRadius <= paddleX + paddleWidth && ballY - ballRadius <= paddleY + paddleHeight && ballY + ballRadius >= paddleY){
+                directionX *= -1;
             }
-            
-            
-            
-            
+            else if(ballY + ballRadius >= canvas.height){
+                lives --;
+                ballX = canvas.width/2;
+                ballY = canvas.height/2;
+                if(lives == 0){
+                    window.location.href = "/SoccerNoid/sources/gameOver.html";
+                }
+            }
+           }
+
+           function paddleKeyboard(){
+                       
+            if(leftPressed && paddleX > 0){
+                paddleX -= 7;
+            }
            }
 
             
