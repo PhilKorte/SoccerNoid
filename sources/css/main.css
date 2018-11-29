@@ -166,3 +166,8 @@ body{
     background: url("/SoccerNoid/sources/img/Gameover.PNG") no-repeat center center;
     background-size: 80% 80%;
 }
+.gameOverUser{
+    width: 40%;
+    height: 15%;
+    float: left;
+}
