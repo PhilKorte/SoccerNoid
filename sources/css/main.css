@@ -170,4 +170,10 @@ body{
     width: 40%;
     height: 15%;
     float: left;
+    font-size: 4vh;
+    margin-top: -3vh;
+    color: black;
+    font-style: italic;
+    font-family: monospace;
+    text-align: center;
 }
