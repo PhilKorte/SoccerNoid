@@ -162,6 +162,7 @@ drawBall();
 drawScore();
 drawLives();
 
+
 setTimeout(draw,30);
 }
 
@@ -185,15 +186,51 @@ else if(ballY + 2*ballRadius >= canvas.height){
     ballX = canvas.width/2;
     ballY = canvas.height/2;
     if(lives == 0){
-        window.location.href = "/SoccerNoid/sources/gameOver.html";
         userexit(user.name, user.team, score);
+        window.location.href = "/SoccerNoid/sources/gameOver.html";
+        
     }
 }
 }
 function userexit(name, team, points){
+    // muss nach verlorenem und gewonnenem spiel ausgeführt werden !
+    setHighscores(name, team, points);
     var obj = {"name": name, "team": team, "score": points};
     localStorage.setItem("userexitStorage", JSON.stringify(obj));
 }
+function setHighscores(name, team, points){
+    var scores;
+    try {
+        scores = JSON.parse(localStorage.getItem("SoccerNoidHighscores"));
+        var tmp = scores.users[0][0];
+    } catch (error) {
+        var obj = {"users": [[name , team, points]]};
+        localStorage.setItem("SoccerNoidHighscores", JSON.stringify(obj));
+        console.log("First score saved");
+        return;
+    }
+    scores.users.push([name, team, points]);
+
+    scores.users.sort(compareSecondColumn);
+    localStorage.setItem("SoccerNoidHighscores", JSON.stringify(scores));
+}
+
+function compareSecondColumn(a, b){
+    if(a[2] === b[2]){
+        if(a[0] === b[0]){
+            if(a[1] === b[1]){
+        return 0;
+    }else{
+        return (a[1] < b[1]) ? -1 : 1;
+    }
+    }else{
+        return (a[0] < b[0]) ? -1 : 1;
+    }
+    }else{
+        return (a[2] < b[2]) ? -1 : 1;
+    }
+}
+
         </script>
     </body>
 </html>
