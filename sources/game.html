@@ -143,7 +143,7 @@ function setScoreMiddle(){
 }
 function setScoreTable(name, team, points){
     var tab = document.getElementById("scoreTab");
-    var tmparr;
+    var tmparr = new Array();;
     var anzeige = 5;
     var inner = "<table class='tableLive'>";
     inner += "<tr class='tableTop'><th>Platzierung</th><th>Name</th><th>Team</th><th>Score</th></tr>"; 
@@ -152,16 +152,15 @@ function setScoreTable(name, team, points){
         tmparr = scores.users;
         tmparr.push([name, team, points]);
     } catch (error) {
-        tmparr.push([name, team, pounts]);       
+        tmparr.push([name, team, points]);       
     }
     tmparr.sort(compareSecondColumn);
     if(tmparr.length < anzeige){
         anzeige = tmparr.length;
-        document.getElementById("headerText").innerHTML = "Das sind die " + anzeige +" besten:";
     }
     for(i = 0 ; i < anzeige; i++){
         var platz = i+1;
-        inner += "<tr class='tablePlace'><th>"+platz+"</th><th>"+scores.users[i][0]+"</th><th>"+scores.users[i][1]+"</th><th>"+scores.users[i][2]+"</th></tr>";  
+        inner += "<tr class='tablePlace'><th>"+platz+"</th><th>"+tmparr[i][0]+"</th><th>"+tmparr[i][1]+"</th><th>"+tmparr[i][2]+"</th></tr>";  
     }
     inner += "</table>";
     tab.innerHTML = inner;
