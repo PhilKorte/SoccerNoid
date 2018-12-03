@@ -44,6 +44,7 @@ var directionX = 1;
 var directionY = 1;
 var rightPressed = false;
 var leftPressed = false;
+var spacePressed = false;
 var keyboardSpeed = 20;
 var board = document.getElementById("anzeigetafel");
 var user = JSON.parse(localStorage.getItem('userinitStorage')); 
@@ -175,6 +176,10 @@ function keyDownHandler(e){
         paddleX = paddleX - keyboardSpeed;
         if(paddleX < 0){
         paddleX = 0 ;
+}
+if(e.keyCode == 32){
+    spacePressed == true;
+    
 }
     
 }

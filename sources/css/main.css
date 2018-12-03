@@ -45,7 +45,7 @@ body{
     background-color: red;
     font-size: 5vh;
     color: white;
-    font-style: italic;
+    font-style: oblique;
     font-family: monospace;
     text-align: center;
 }
@@ -159,7 +159,7 @@ body{
     width: 80%;
     height: 80%;
     background: url("/SoccerNoid/sources/img/Gameover.PNG") no-repeat center center;
-    background-size: 80% 80%;
+    background-size: 65% 80%;
 }
 .gameOverUser{
     width: 40%;
