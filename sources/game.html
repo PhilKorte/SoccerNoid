@@ -21,9 +21,9 @@
         
         </div>
         <div class="gameScore" id="anzeigetafel">
-            <div class="scoreHeader"></div>
-            <div class="scoreMiddle"></div>
-            <div class="scoreLivescores"></div>
+            <div class="scoreHeader" id="scoreHead"></div>
+            <div class="scoreMiddle" id="scoreMid"></div>
+            <div class="scoreLivescores" id="scoreTab"></div>
         </div>
         <div class="gameFooter">
         
@@ -62,6 +62,7 @@ document.addEventListener("keydown", keyDownHandler, false);
 
 function loadLevel(levelCounter){
     initVisitor(levelCounter, user.team);
+    setScoreBoard();
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function (){
         if(xmlhttp.readyState == 4){
@@ -100,10 +101,10 @@ function initVisitor(level, team){
                 visitor = "France";
                 break;
             case "Italy":
-                visitor = "Spain";
+                visitor = "America";
                 break;
             case "Turkey":
-                visitor = "Russia";
+                visitor = "Belgium";
                 break;
             default: 
                 visitor = "France";
@@ -124,6 +125,21 @@ function initVisitor(level, team){
         }
         }
     }
+}
+function setScoreBoard(){
+    setScoreHeader();
+    setScoreMiddle();
+}
+function setScoreHeader(){
+    var head = document.getElementById("scoreHead");
+    head.innerHTML =  "<img class='scoreImg' src='/SoccerNoid/sources/img/teams/"+user.team+".jpg'> VS <img class='scoreImg' src'/SoccerNoid/sources/img/teams/"+visitor+".jpg'>";
+}
+function setScoreMiddle(){
+    var mid = document.getElementById("scoreMid");
+    setScoreTable();
+}
+function setScoreTable(){
+    var tab = document.getElementById("scoreTab");
 }
 function keyDownHandler(e){
     if(e.keyCode == 39){

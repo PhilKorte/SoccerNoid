@@ -143,15 +143,15 @@ body{
     height: 33%;
 }
 .team1{
-    background: url("/SoccerNoid/sources/img/teams/flag_germany.jpg");
+    background: url("/SoccerNoid/sources/img/teams/Germany.jpg");
     background-size: 100% 100%;
 }
 .team2{
-    background: url("/SoccerNoid/sources/img/teams/flag_italiy.jpg");
+    background: url("/SoccerNoid/sources/img/teams/Italiy.jpg");
     background-size: 100% 100%;
 }
 .team3{
-    background: url("/SoccerNoid/sources/img/teams/flag_turkey.jpg");
+    background: url("/SoccerNoid/sources/img/teams/Turkey.jpg");
     background-size: 100% 100%;
 }
 /** css für Gameover **/
@@ -198,7 +198,11 @@ body{
     width: 100%;
     height: 20%;
     float: left;
-    background-color: red;
+    font-size: 4vh;
+    color: black;
+    font-style: italic;
+    font-family: monospace;
+    text-align: center;
 }
 .scoreMiddle{
     width: 100%;
@@ -211,4 +215,10 @@ body{
     height: 50%;
     float: left;
     background-color: blue;
+}
+.scoreImg{
+    width: 40%;
+    height: 60%;
+    margin-top: 3vh;
+    margin-left: 1vh;
 }
