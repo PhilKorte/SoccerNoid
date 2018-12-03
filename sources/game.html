@@ -132,14 +132,39 @@ function setScoreBoard(){
 }
 function setScoreHeader(){
     var head = document.getElementById("scoreHead");
-    head.innerHTML =  "<img class='scoreImg' src='/SoccerNoid/sources/img/teams/"+user.team+".jpg'> VS <img class='scoreImg' src'/SoccerNoid/sources/img/teams/"+visitor+".jpg'>";
+    head.innerHTML =  "<img class='scoreImg' src='/SoccerNoid/sources/img/teams/"+user.team+".jpg'> VS <img class='scoreImg' src='/SoccerNoid/sources/img/teams/"+visitor+".jpg'>";
 }
 function setScoreMiddle(){
     var mid = document.getElementById("scoreMid");
-    setScoreTable();
+
+    mid.innerHTML = "Lives: " + lives + " <br> Score: " + score;
+
+    setScoreTable(user.name, user.team, score);
 }
-function setScoreTable(){
+function setScoreTable(name, team, points){
     var tab = document.getElementById("scoreTab");
+    var tmparr;
+    var anzeige = 5;
+    var inner = "<table class='tableLive'>";
+    inner += "<tr class='tableTop'><th>Platzierung</th><th>Name</th><th>Team</th><th>Score</th></tr>"; 
+    try {
+        var scores = JSON.parse(localStorage.getItem("SoccerNoidHighscores"));
+        tmparr = scores.users;
+        tmparr.push([name, team, points]);
+    } catch (error) {
+        tmparr.push([name, team, pounts]);       
+    }
+    tmparr.sort(compareSecondColumn);
+    if(tmparr.length < anzeige){
+        anzeige = tmparr.length;
+        document.getElementById("headerText").innerHTML = "Das sind die " + anzeige +" besten:";
+    }
+    for(i = 0 ; i < anzeige; i++){
+        var platz = i+1;
+        inner += "<tr class='tablePlace'><th>"+platz+"</th><th>"+scores.users[i][0]+"</th><th>"+scores.users[i][1]+"</th><th>"+scores.users[i][2]+"</th></tr>";  
+    }
+    inner += "</table>";
+    tab.innerHTML = inner;
 }
 function keyDownHandler(e){
     if(e.keyCode == 39){
@@ -179,11 +204,6 @@ function drawScore() {
  ctx.fillText("Score: "+score, 20, 13);
 }
 
-function drawLives() {
- ctx.font = "16px Arial";
- ctx.fillStyle = "darkgreen";
- ctx.fillText("Lives: "+lives, canvas.width-75, 13);
-}
 function drawPaddle(){
 
    ctx.beginPath();
@@ -227,7 +247,6 @@ drawBricks();
 drawPaddle();
 drawBall();
 drawScore();
-drawLives();
 
 
 setTimeout(draw,30);
@@ -250,6 +269,7 @@ else if(ballX + 2* ballRadius >= paddleX && ballX <= paddleX + paddleWidth && ba
 }
 else if(ballY + 2*ballRadius >= canvas.height){
     lives --;
+    setScoreMiddle();
     ballX = canvas.width/2;
     ballY = canvas.height/2;
     if(lives == 0){
