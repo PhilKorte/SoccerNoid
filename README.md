@@ -12,9 +12,9 @@ Datum der Abgabe: 04.12.2018
 
 - Folgende Browser werden von SoccerNoid unterstützt: Internet Explorer, Mozilla Firefox
 
-**Spiel starten**
+**Spiel starten:**
 
-selectTeam.html auf Ihrem Browser starten 
+- selectTeam.html auf Ihrem Browser starten 
 
 **Level Datei hinzufügen:**
 
@@ -26,6 +26,8 @@ selectTeam.html auf Ihrem Browser starten
 
 - Anschließend mit Klick auf "Jetzt spielen!" gelangen Sie zum Spiel
 
+**Tasteneigenschaften:**
+
 - **rechte Pfeiltaste:** Den Paddle nach rechts bewegen
 
 - **linke Pfeiltaste:** Den Paddle nach links bewegen
@@ -34,6 +36,19 @@ selectTeam.html auf Ihrem Browser starten
 
 
 ## Features
+
+- Wahl einer Mannschaft und entsprechende Anzeige 
+
+- Highscore von Benutzer werden gespeichert und angezeigt
+
+- Highscore Zählung
+
+- Steine kriegen die Trikot Farben der Mannschaften 
+
+- Musik und Sounds
+
+- Dynamisches Hinzufügen der Levels
+
 
 ## Bugs
 
