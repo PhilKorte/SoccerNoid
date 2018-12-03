@@ -55,3 +55,20 @@ Datum der Abgabe: 04.12.2018
 ## Aufgabenaufteilung
 
 ## Lizenzen
+
+Dieses Projekt steht unter der MIT Lizenz.
+
+## Quellen und Lizenzen der verwendeten Medien
+
+Alle verwendeten Medien stehen unter der Creative Commons Lizenz
+
+Quellen der verwendeten Medien:
+
+- Bilder
+
+https://pixabay.com/de/
+
+
+
+
+
