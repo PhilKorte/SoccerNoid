@@ -21,7 +21,9 @@
         
         </div>
         <div class="gameScore" id="anzeigetafel">
-        
+            <div class="scoreHeader"></div>
+            <div class="scoreMiddle"></div>
+            <div class="scoreLivescores"></div>
         </div>
         <div class="gameFooter">
         
@@ -50,14 +52,16 @@ var board = document.getElementById("anzeigetafel");
 var user = JSON.parse(localStorage.getItem('userinitStorage')); 
 var levelData;
 var lvl = 1;
+var visitor; 
 
 loadLevel(lvl);
 
-board.innerHTML = "<p>"+user.name + " " + user.team+ "</p>";
+//board.innerHTML = "<p>"+user.name + " " + user.team+ "</p>";
 document.addEventListener("mousemove", mouseMoveHandler, false);
 document.addEventListener("keydown", keyDownHandler, false);
 
 function loadLevel(levelCounter){
+    initVisitor(levelCounter, user.team);
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function (){
         if(xmlhttp.readyState == 4){
@@ -73,6 +77,53 @@ function loadLevel(levelCounter){
 function initLevel(raw){
     var level = JSON.parse(raw);
     levelData = level;
+}
+function initVisitor(level, team){
+    if(level == 1){
+        switch(team){
+            case "Germany":
+                visitor = "Netherlands";
+                break;
+            case "Italy":
+                visitor = "Germany";
+                break;
+            case "Turkey":
+                visitor = "Germany";
+                break;
+            default: 
+                visitor = "Germany";
+        }
+    }else{
+        if(level == 2){
+            switch(team){
+            case "Germany":
+                visitor = "France";
+                break;
+            case "Italy":
+                visitor = "Spain";
+                break;
+            case "Turkey":
+                visitor = "Russia";
+                break;
+            default: 
+                visitor = "France";
+        }
+        }else{
+            switch(team){
+            case "Germany":
+                visitor = "Austria";
+                break;
+            case "Italy":
+                visitor = "Netherlands";
+                break;
+            case "Turkey":
+                visitor = "Italy";
+                break;
+            default: 
+                visitor = "Austria";
+        }
+        }
+    }
 }
 function keyDownHandler(e){
     if(e.keyCode == 39){
@@ -187,7 +238,7 @@ else if(ballY + 2*ballRadius >= canvas.height){
     ballY = canvas.height/2;
     if(lives == 0){
         userexit(user.name, user.team, score);
-        window.location.href = "/SoccerNoid/sources/gameOver.html";
+        //window.location.href = "/SoccerNoid/sources/gameOver.html";
         
     }
 }
