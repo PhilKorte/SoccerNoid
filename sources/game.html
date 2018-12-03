@@ -9,9 +9,6 @@
         <div class="gameHeader">
 
         </div>
-        <div class="gameLeft">
-
-        </div>
         <div id="cnt" class="gameGround">
             <img src="/SoccerNoid/sources/img/ball.png" style="display: none;" id = "ballImage" >
 
@@ -21,7 +18,9 @@
         
         </div>
         <div class="gameScore" id="anzeigetafel">
-        
+            <div class="scoreHeader" id="scoreHead"></div>
+            <div class="scoreMiddle" id="scoreMid"></div>
+            <div class="scoreLivescores" id="scoreTab"></div>
         </div>
         <div class="gameFooter">
         
@@ -50,14 +49,17 @@ var board = document.getElementById("anzeigetafel");
 var user = JSON.parse(localStorage.getItem('userinitStorage')); 
 var levelData;
 var lvl = 1;
+var visitor; 
 
 loadLevel(lvl);
 
-board.innerHTML = "<p>"+user.name + " " + user.team+ "</p>";
+//board.innerHTML = "<p>"+user.name + " " + user.team+ "</p>";
 document.addEventListener("mousemove", mouseMoveHandler, false);
 document.addEventListener("keydown", keyDownHandler, false);
 
 function loadLevel(levelCounter){
+    initVisitor(levelCounter, user.team);
+    setScoreBoard();
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function (){
         if(xmlhttp.readyState == 4){
@@ -73,6 +75,92 @@ function loadLevel(levelCounter){
 function initLevel(raw){
     var level = JSON.parse(raw);
     levelData = level;
+}
+function initVisitor(level, team){
+    if(level == 1){
+        switch(team){
+            case "Germany":
+                visitor = "Netherlands";
+                break;
+            case "Italy":
+                visitor = "Germany";
+                break;
+            case "Turkey":
+                visitor = "Germany";
+                break;
+            default: 
+                visitor = "Germany";
+        }
+    }else{
+        if(level == 2){
+            switch(team){
+            case "Germany":
+                visitor = "France";
+                break;
+            case "Italy":
+                visitor = "America";
+                break;
+            case "Turkey":
+                visitor = "Belgium";
+                break;
+            default: 
+                visitor = "France";
+        }
+        }else{
+            switch(team){
+            case "Germany":
+                visitor = "Austria";
+                break;
+            case "Italy":
+                visitor = "Netherlands";
+                break;
+            case "Turkey":
+                visitor = "Italy";
+                break;
+            default: 
+                visitor = "Austria";
+        }
+        }
+    }
+}
+function setScoreBoard(){
+    setScoreHeader();
+    setScoreMiddle();
+}
+function setScoreHeader(){
+    var head = document.getElementById("scoreHead");
+    head.innerHTML =  "<img class='scoreImg' src='/SoccerNoid/sources/img/teams/"+user.team+".jpg'> VS <img class='scoreImg' src='/SoccerNoid/sources/img/teams/"+visitor+".jpg'>";
+}
+function setScoreMiddle(){
+    var mid = document.getElementById("scoreMid");
+
+    mid.innerHTML = "Lives: " + lives + " <br> Score: " + score;
+
+    setScoreTable(user.name, user.team, score);
+}
+function setScoreTable(name, team, points){
+    var tab = document.getElementById("scoreTab");
+    var tmparr = new Array();;
+    var anzeige = 5;
+    var inner = "<table class='tableLive'>";
+    inner += "<tr class='tableTop'><th>Platzierung</th><th>Name</th><th>Team</th><th>Score</th></tr>"; 
+    try {
+        var scores = JSON.parse(localStorage.getItem("SoccerNoidHighscores"));
+        tmparr = scores.users;
+        tmparr.push([name, team, points]);
+    } catch (error) {
+        tmparr.push([name, team, points]);       
+    }
+    tmparr.sort(compareSecondColumn);
+    if(tmparr.length < anzeige){
+        anzeige = tmparr.length;
+    }
+    for(i = 0 ; i < anzeige; i++){
+        var platz = i+1;
+        inner += "<tr class='tablePlace'><th>"+platz+"</th><th>"+tmparr[i][0]+"</th><th>"+tmparr[i][1]+"</th><th>"+tmparr[i][2]+"</th></tr>";  
+    }
+    inner += "</table>";
+    tab.innerHTML = inner;
 }
 function keyDownHandler(e){
     if(e.keyCode == 39){
@@ -112,11 +200,6 @@ function drawScore() {
  ctx.fillText("Score: "+score, 20, 13);
 }
 
-function drawLives() {
- ctx.font = "16px Arial";
- ctx.fillStyle = "darkgreen";
- ctx.fillText("Lives: "+lives, canvas.width-75, 13);
-}
 function drawPaddle(){
 
    ctx.beginPath();
@@ -134,6 +217,8 @@ function drawBall(){
 }
 function drawBricks(){
     var rows, cols;
+    var fillColor = visitorColor(visitor);
+    var fillColorKeeper = visitorColorKeeper(visitor);
 try {
        rows = levelData.positions.length;
        cols = levelData.positions[0].length;
@@ -142,7 +227,11 @@ try {
                 if(levelData.positions[i][j] > 0){
                     ctx.beginPath();
                     ctx.rect((canvas.width/cols * j)+(canvas.width*0.02),(canvas.height/2.5/rows*i) + (canvas.height * 0.05 ), canvas.width / (cols*1.2), canvas.height / 2.5 / (rows*1.5));
-                    ctx.fillStyle = "black";
+                    if(i == 0){
+                        ctx.fillStyle = fillColorKeeper;
+                    }else{
+                        ctx.fillStyle = fillColor;
+                    }
                     ctx.fill();
                     ctx.closePath()
                 }   
@@ -153,14 +242,72 @@ try {
 }
 
 }
-
+function visitorColor(team){
+    switch (team) {
+        case "America":
+            return "darkblue";
+            break;
+        case "Austria":
+            return "darkred";
+            break;
+        case "Belgium":
+            return "yellow";
+            break;
+        case "France":
+            return "blue";
+            break;
+        case "Germany":
+            return "white";
+            break;
+        case "Italy":
+            return "darkblue";
+            break;
+        case "Netherlands":
+            return "orange";
+            break;
+        case "Turkey":
+            return "red";
+            break;
+        default:
+            break;
+    }
+}
+function visitorColorKeeper(team){
+    switch (team) {
+        case "America":
+            return "yellow";
+            break;
+        case "Austria":
+            return "darkgreen";
+            break;
+        case "Belgium":
+            return "green";
+            break;
+        case "France":
+            return "purple";
+            break;
+        case "Germany":
+            return "blue";
+            break;
+        case "Italy":
+            return "darkgrey";
+            break;
+        case "Netherlands":
+            return "black";
+            break;
+        case "Turkey":
+            return "green";
+            break;
+        default:
+            break;
+    }
+}
 function draw() {
 ctx.clearRect(0, 0, canvas.width, canvas.height);
 drawBricks();
 drawPaddle();
 drawBall();
 drawScore();
-drawLives();
 
 
 setTimeout(draw,30);
@@ -183,6 +330,7 @@ else if(ballX + 2* ballRadius >= paddleX && ballX <= paddleX + paddleWidth && ba
 }
 else if(ballY + 2*ballRadius >= canvas.height){
     lives --;
+    setScoreMiddle();
     ballX = canvas.width/2;
     ballY = canvas.height/2;
     if(lives == 0){
