@@ -9,9 +9,6 @@
         <div class="gameHeader">
 
         </div>
-        <div class="gameLeft">
-
-        </div>
         <div id="cnt" class="gameGround">
             <img src="/SoccerNoid/sources/img/ball.png" style="display: none;" id = "ballImage" >
 
@@ -220,6 +217,8 @@ function drawBall(){
 }
 function drawBricks(){
     var rows, cols;
+    var fillColor = visitorColor(visitor);
+    var fillColorKeeper = visitorColorKeeper(visitor);
 try {
        rows = levelData.positions.length;
        cols = levelData.positions[0].length;
@@ -228,7 +227,11 @@ try {
                 if(levelData.positions[i][j] > 0){
                     ctx.beginPath();
                     ctx.rect((canvas.width/cols * j)+(canvas.width*0.02),(canvas.height/2.5/rows*i) + (canvas.height * 0.05 ), canvas.width / (cols*1.2), canvas.height / 2.5 / (rows*1.5));
-                    ctx.fillStyle = "black";
+                    if(i == 0){
+                        ctx.fillStyle = fillColorKeeper;
+                    }else{
+                        ctx.fillStyle = fillColor;
+                    }
                     ctx.fill();
                     ctx.closePath()
                 }   
@@ -239,7 +242,66 @@ try {
 }
 
 }
-
+function visitorColor(team){
+    switch (team) {
+        case "America":
+            return "darkblue";
+            break;
+        case "Austria":
+            return "darkred";
+            break;
+        case "Belgium":
+            return "yellow";
+            break;
+        case "France":
+            return "blue";
+            break;
+        case "Germany":
+            return "white";
+            break;
+        case "Italy":
+            return "darkblue";
+            break;
+        case "Netherlands":
+            return "orange";
+            break;
+        case "Turkey":
+            return "red";
+            break;
+        default:
+            break;
+    }
+}
+function visitorColorKeeper(team){
+    switch (team) {
+        case "America":
+            return "yellow";
+            break;
+        case "Austria":
+            return "darkgreen";
+            break;
+        case "Belgium":
+            return "green";
+            break;
+        case "France":
+            return "purple";
+            break;
+        case "Germany":
+            return "blue";
+            break;
+        case "Italy":
+            return "darkgrey";
+            break;
+        case "Netherlands":
+            return "black";
+            break;
+        case "Turkey":
+            return "green";
+            break;
+        default:
+            break;
+    }
+}
 function draw() {
 ctx.clearRect(0, 0, canvas.width, canvas.height);
 drawBricks();

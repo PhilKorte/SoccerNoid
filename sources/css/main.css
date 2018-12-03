@@ -10,13 +10,7 @@ body{
     width: 100%;
     height: 5%;
     float: left;
-    background-color: darkgrey;
-}
-.gameLeft{
-    width: 5%;
-    height: 90%;
-    float: left;
-    background-color:darkgrey; 
+    background-color: white;
 }
 .gameGround{
     width: 50%;
@@ -26,7 +20,7 @@ body{
     background-size: 100% 100%;
 }
 .gameScore{
-    width: 45%;
+    width: 50%;
     height: 90%;
     float: right;
     background-image: url("/SoccerNoid/sources/img/stadion.jpg");
@@ -36,7 +30,7 @@ body{
     width: 100%;
     height: 5%;
     float: left;
-    background-color: darkgrey;
+    background-color: white;
 }
 
 /** css für Startseite **/
