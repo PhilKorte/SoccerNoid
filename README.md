@@ -8,7 +8,13 @@ Autoren: Phil Korte und Miray Atik
 
 Datum der Abgabe: 04.12.2018
 
+**Browserkompatibilität**
+
+- Folgende Browser werden von SoccerNoid unterstützt: Internet Explorer, Mozilla Firefox
+
 ## Spielanleitung
+
+
 
 ## Features
 
