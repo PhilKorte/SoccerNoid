@@ -14,6 +14,6 @@ window.onload = function(){
         console.log("button clicked");
         window.location.href="/SoccerNoid/sources/end.html";
      });
-    userText.innerHTML = "<p> Username:" + user.name + "<br> Team:" + user.team + "<br> score:" + user.score + "</p>";
+    userText.innerHTML = "<p> Username:" + user.name + "<br> Team:" + user.team + "<br> Score:" + user.score + "</p>";
     //declare functions
 }
