@@ -26,6 +26,8 @@ Datum der Abgabe: 04.12.2018
 
 ## Spielanleitung
 
+- Zum Starten die start.html Datei unter /sources öffnen
+
 - Suchen Sie sich ein Team aus mit dem Sie spielen möchten und geben Sie ihren Spielnamen ein
 
 - Anschließend mit Klick auf "Jetzt spielen!" gelangen Sie zum Spiel
@@ -39,6 +41,8 @@ Datum der Abgabe: 04.12.2018
 - **Leertaste:** Spiel starten/Ball bewegt sich
 
 - **M-Taste:** Musik im Spiel stummschalten
+
+- **P-Taste:** Spiel und Musik pausieren
 
 
 ## Features
@@ -57,6 +61,8 @@ Datum der Abgabe: 04.12.2018
 
 
 ## Bugs
+
+- Ball prallt nicht immer korrekt ab 
 
 ## Aufgabenaufteilung
 

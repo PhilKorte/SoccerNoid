@@ -211,19 +211,21 @@ if(e.keyCode == 32){
     }else{
         mPressed = false;
         music.play();
-    }
+    }}
 if(e.keyCode == 80){
      if(pPressed == false){
          clearInterval(interval1);
+         music.pause();
          pPressed = true;
      }else{
          pPressed = false;
+         music.play();
          interval1 = setInterval(function (){
             draw();
         }, 30);
      }
 }
-}
+
 
 }
 
