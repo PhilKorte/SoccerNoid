@@ -33,7 +33,7 @@ window.onload = function(){
             return;
         } 
         userinit(username, userteam);
-        window.location.href="./game.html";
+        window.location.href="../game.html";
      });
     //declare functions
      function userinit(name, team){

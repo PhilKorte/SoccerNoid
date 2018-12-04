@@ -10,11 +10,11 @@ window.onload = function(){
     music.play();
     button1.addEventListener("click", function(event){
         console.log("button clicked");
-        window.location.href="./selectTeam.html";
+        window.location.href="../selectTeam.html";
     });
     button2.addEventListener("click", function(event){
         console.log("button clicked");
-        window.location.href="./end.html";
+        window.location.href="../end.html";
      });
     userText.innerHTML = "<p> Username:" + user.name + "<br> Team:" + user.team + "<br> Score:" + user.score + "</p>";
     //declare functions
