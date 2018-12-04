@@ -37,7 +37,7 @@ var paddleX = 300;
 var paddleY = canvas.height * 0.85;
 var ballRadius = 10;
 var ballX = canvas.width/2;
-var ballY = canvas.height/2;
+var ballY = canvas.height-30;
 var score = 0;
 var lives = 3;
 var directionX = 1;
@@ -51,6 +51,7 @@ var user = JSON.parse(localStorage.getItem('userinitStorage'));
 var levelData;
 var lvl = 1;
 var visitor; 
+var speed = 5;
 
 
 loadLevel(lvl);
@@ -316,23 +317,24 @@ drawScore();
 
 setTimeout(draw,30);
 }
-
-function moveBall(){
-ballX += 5 * directionX;
-ballY += 5 * directionY;
-if(ballX + 2*ballRadius >= canvas.width || ballX  <= 0){
+function collisionDetectionPaddle(){
+    px = paddleX - speed;
+    py = paddleY - speed;
+    pheight = paddleHeight + 2*speed;
+    pwidth = paddleWidth + 2*speed;
+    if(ballY + 2*ballRadius >= py && ballY <= py + pheight){
+        if(ballX + 2*ballRadius >= px && ballX <= px+pwidth){
+            directionY *= -1;
+        }
+    }
+}
+function collisionDetectionWall(){
+    if(ballX + 2*ballRadius >= canvas.width || ballX  <= 0){
 directionX *= -1;
 }
 if( ballY  <= 0 ){
 directionY *= -1;
-}
-if(ballY + 2* ballRadius >= paddleY && ballY  <= paddleY + paddleHeight && ballX  >= paddleX  && ballX + 2*ballRadius <= paddleX + paddleWidth){
-    directionY *= -1;
-} 
-else if(ballX + 2* ballRadius >= paddleX && ballX <= paddleX + paddleWidth && ballY  <= paddleY + paddleHeight && ballY + 2*ballRadius >= paddleY){
-    directionX *= -1;
-}
-else if(ballY + 2*ballRadius >= canvas.height){
+}else if(ballY + 2*ballRadius >= canvas.height){
     lives --;
     setScoreMiddle();
     ballX = canvas.width/2;
@@ -340,9 +342,22 @@ else if(ballY + 2*ballRadius >= canvas.height){
     if(lives == 0){
         userexit(user.name, user.team, score);
         window.location.href = "/SoccerNoid/sources/gameOver.html";
+    }
+}
+}
+function collisionDetectionBricks(){
+    rows = levelData.positions.length;
+    cols = levelData.positions[0].length;
+    for(i = 0; i < rows; i++){
         
     }
 }
+function moveBall(){
+ballX += speed * directionX;
+ballY += speed * directionY;
+collisionDetectionPaddle();
+collisionDetectionWall();
+collisionDetectionBricks();
 }
 function userexit(name, team, points){
     // muss nach verlorenem und gewonnenem spiel ausgeführt werden !
