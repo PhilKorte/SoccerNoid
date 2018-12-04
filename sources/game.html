@@ -11,7 +11,9 @@
         </div>
         <div id="cnt" class="gameGround">
             <img src="/SoccerNoid/sources/img/ball.png" style="display: none;" id = "ballImage" >
-
+            <img src= "/SoccerNoid/sources/img/teams/GermanyPaddle.png" style="display: none;" id = "imgGermany" >
+            <img src= "/SoccerNoid/sources/img/teams/ItalyPaddle.png" style="display: none;" id = "imgItaly" >
+            <img src= "/SoccerNoid/sources/img/teams/TurkeyPaddle.png" style="display: none;" id = "imgTurkey" >
             <canvas id= "ourPlayground"  > </canvas>
            
             
@@ -31,13 +33,13 @@ var ctx = canvas.getContext("2d");
 var container = document.getElementById("cnt");
 canvas.width = container.offsetWidth;
 canvas.height = container.offsetHeight;
-var paddleHeight = 10;
-var paddleWidth = 60;
+var paddleHeight = 15;
+var paddleWidth = 80;
 var paddleX = 300;
 var paddleY = canvas.height * 0.85;
 var ballRadius = 10;
 var ballX = canvas.width/2;
-var ballY = canvas.height-30;
+var ballY = canvas.height/2;
 var score = 0;
 var lives = 3;
 var directionX = 1;
@@ -52,6 +54,7 @@ var levelData;
 var lvl = 1;
 var visitor; 
 var speed = 5;
+var interval1;
 
 loadLevel(lvl);
 
@@ -60,6 +63,11 @@ document.addEventListener("mousemove", mouseMoveHandler, false);
 document.addEventListener("keydown", keyDownHandler, false);
 
 function loadLevel(levelCounter){
+    ballX = canvas.width/2;
+    ballY = canvas.height/2;
+    directionX = 1;
+    directionY = 1;
+    spacePressed = false;
     initVisitor(levelCounter, user.team);
     setScoreBoard();
     var xmlhttp = new XMLHttpRequest();
@@ -68,6 +76,7 @@ function loadLevel(levelCounter){
         var levelJson = xmlhttp.responseText;
         initLevel(levelJson);
         draw();
+        drawText();
         } 
     }
     xmlhttp.open("GET", "/SoccerNoid/sources/levels/level" + levelCounter + "/level.json", true);
@@ -177,13 +186,16 @@ function keyDownHandler(e){
         paddleX = paddleX - keyboardSpeed;
         if(paddleX < 0){
         paddleX = 0 ;
-}
+}}
 if(e.keyCode == 32){
-    spacePressed == true;
-    
-}
-    
-}
+    if(spacePressed == false){
+    interval1 = setInterval(function (){
+            draw();
+        }, 30);
+        spacePressed = true;
+    }
+} 
+
 }
 
 
@@ -200,26 +212,30 @@ if(positionX > 0 && positionX < canvas.width) {
 }
 }
 
-function drawScore() {
- ctx.font = "16px Arial";
- ctx.fillStyle = "darkgreen";
- ctx.fillText("Score: "+score, 20, 13);
-}
-
 function drawPaddle(){
 
-   ctx.beginPath();
-   ctx.rect(paddleX, paddleY, paddleWidth, paddleHeight);
-   ctx.fillStyle = "black";
-   ctx.fill();
-   ctx.closePath();
-  
+   if(user.team == "Germany"){
+   var image = document.getElementById("imgGermany");
+   ctx.drawImage(image, paddleX, paddleY, paddleWidth, paddleHeight );
+} else if(user.team == "Italy"){
+    var image = document.getElementById("imgItaly");
+    ctx.drawImage(image, paddleX,paddleY,paddleWidth,paddleHeight);
+} else if(user.team == "Turkey"){
+    var image = document.getElementById("imgTurkey");
+    ctx.drawImage(image, paddleX,paddleY,paddleWidth,paddleHeight);
+   
+}
 }
 
 function drawBall(){
    var image = document.getElementById("ballImage");
    ctx.drawImage(image, ballX,ballY, 2*ballRadius,2*ballRadius);
    moveBall();              
+}
+function drawText(){
+    ctx.font = "18px Arial";
+    ctx.fillStyle = "green";
+    ctx.fillText("Mit Leertaste beginnen", canvas.width*0.4, canvas.height * 0.5);
 }
 function drawBricks(){
     var rows, cols;
@@ -313,10 +329,6 @@ ctx.clearRect(0, 0, canvas.width, canvas.height);
 drawBricks();
 drawPaddle();
 drawBall();
-drawScore();
-
-
-setTimeout(draw,30);
 }
 function collisionDetectionPaddle(){
     px = paddleX - speed;
@@ -337,6 +349,7 @@ if( ballY  <= 0 ){
 directionY *= -1;
 }else if(ballY + 2*ballRadius >= canvas.height){
     lives --;
+    score = score - 500;
     setScoreMiddle();
     ballX = canvas.width/2;
     ballY = canvas.height/2;
@@ -347,10 +360,34 @@ directionY *= -1;
 }
 }
 function collisionDetectionBricks(){
-    rows = levelData.positions.length;
-    cols = levelData.positions[0].length;
+    var rows = levelData.positions.length;
+    var cols = levelData.positions[0].length;
+    var levelFlag = true;
     for(i = 0; i < rows; i++){
-        
+        for(j = 0; j < cols; j++){
+            if(levelData.positions[i][j] > 0){
+            levelFlag = false;
+            var px = (canvas.width/cols * j)+(canvas.width*0.02); 
+            var py =  (canvas.height/2.5/rows*i) + (canvas.height * 0.05 );
+            var pwidth = canvas.width / (cols*1.2);
+            var pheight = canvas.height / 2.5 / (rows*1.5);
+            if(ballY + 2*ballRadius >= py && ballY <= py + pheight && ballX + 2*ballRadius >= px && ballX <= px+pwidth){   
+                directionY *= -1;
+                levelData.positions[i][j] += -1;
+                console.log(levelData.positions[i][j]);
+                score = score + 100;
+                setScoreMiddle();
+            } }
+        }
+    }
+    if(levelFlag){
+        clearInterval(interval1);
+        lvl++;
+        if(lvl == 4){
+            userexit(user.name, user.team, score);
+            window.location.href = "/SoccerNoid/sources/gameWon.html";
+        }
+        setTimeout(loadLevel(lvl), 100);
     }
 }
 function moveBall(){
@@ -395,7 +432,7 @@ function compareSecondColumn(a, b){
         return (a[0] < b[0]) ? -1 : 1;
     }
     }else{
-        return (a[2] < b[2]) ? -1 : 1;
+        return (a[2] > b[2]) ? -1 : 1;
     }
 }
 
