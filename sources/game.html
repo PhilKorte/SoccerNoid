@@ -1,8 +1,8 @@
 <html>
     <head>
         <title>SoccerNoid</title>
-        <link rel="stylesheet" type="text/css" href="./sources/css/main.css">
-        <script type="text/javascript" language="javascript" src="./sources/javascript/mainGame.js"></script>
+        <link rel="stylesheet" type="text/css" href="./css/main.css">
+        <script type="text/javascript" language="javascript" src="./javascript/mainGame.js"></script>
 
     </head>
     <body>
@@ -10,15 +10,15 @@
 
         </div>
         <div id="cnt" class="gameGround">
-            <img src="./sources/img/ball.png" style="display: none;" id = "ballImage" >
-            <img src= "./sources/img/teams/GermanyPaddle.png" style="display: none;" id = "imgGermany" >
-            <img src= "./sources/img/teams/ItalyPaddle.png" style="display: none;" id = "imgItaly" >
-            <img src= "./sources/img/teams/TurkeyPaddle.png" style="display: none;" id = "imgTurkey" >
+            <img src="./img/ball.png" style="display: none;" id = "ballImage" >
+            <img src= "./img/teams/GermanyPaddle.png" style="display: none;" id = "imgGermany" >
+            <img src= "./img/teams/ItalyPaddle.png" style="display: none;" id = "imgItaly" >
+            <img src= "./img/teams/TurkeyPaddle.png" style="display: none;" id = "imgTurkey" >
 
             <audio id= "audiofile" preload="auto">
-            <source src="./sources/sounds/gameSound.wav" />
-            <source src="./sources/sounds/gameSound.mp3" />
-            <source src="./sources/sounds/gameSound.ogg" />
+            <source src="./sounds/gameSound.wav" />
+            <source src="./sounds/gameSound.mp3" />
+            <source src="./sounds/gameSound.ogg" />
                 </audio>
             <canvas id= "ourPlayground"  > </canvas>
            
@@ -54,6 +54,7 @@ var rightPressed = false;
 var leftPressed = false;
 var spacePressed = false;
 var mPressed = false;
+var pPressed = false;
 var keyboardSpeed = 20;
 var board = document.getElementById("anzeigetafel");
 var user = JSON.parse(localStorage.getItem('userinitStorage')); 
@@ -87,7 +88,7 @@ function loadLevel(levelCounter){
         drawText();
         } 
     }
-    xmlhttp.open("GET", "/SoccerNoid/sources/levels/level" + levelCounter + "/level.json", true);
+    xmlhttp.open("GET", "./levels/level" + levelCounter + "/level.json", true);
     xmlhttp.send();
     
 }
@@ -148,7 +149,7 @@ function setScoreBoard(){
 }
 function setScoreHeader(){
     var head = document.getElementById("scoreHead");
-    head.innerHTML =  "<img class='scoreImg' src='/SoccerNoid/sources/img/teams/"+user.team+".jpg'> VS <img class='scoreImg' src='/SoccerNoid/sources/img/teams/"+visitor+".jpg'>";
+    head.innerHTML =  "<img class='scoreImg' src='./img/teams/"+user.team+".jpg'> VS <img class='scoreImg' src='./img/teams/"+visitor+".jpg'>";
 }
 function setScoreMiddle(){
     var mid = document.getElementById("scoreMid");
@@ -211,7 +212,17 @@ if(e.keyCode == 32){
         mPressed = false;
         music.play();
     }
-
+if(e.keyCode == 80){
+     if(pPressed == false){
+         clearInterval(interval1);
+         pPressed = true;
+     }else{
+         pPressed = false;
+         interval1 = setInterval(function (){
+            draw();
+        }, 30);
+     }
+}
 }
 
 }
@@ -374,7 +385,7 @@ directionY *= -1;
     ballY = canvas.height/2;
     if(lives == 0){
         userexit(user.name, user.team, score);
-        window.location.href = "/SoccerNoid/sources/gameOver.html";
+        window.location.href = "./gameOver.html";
     }
 }
 }
@@ -404,7 +415,7 @@ function collisionDetectionBricks(){
         lvl++;
         if(lvl == 4){
             userexit(user.name, user.team, score);
-            window.location.href = "/SoccerNoid/sources/gameWon.html";
+            window.location.href = "./gameWon.html";
         }
         setTimeout(loadLevel(lvl), 100);
     }

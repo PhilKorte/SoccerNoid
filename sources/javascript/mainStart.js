@@ -6,11 +6,11 @@ window.onload = function(){
     //logic
     button1.addEventListener("click", function(event){
         console.log("button clicked");
-        window.location.href="/SoccerNoid/sources/selectTeam.html";
+        window.location.href="./selectTeam.html";
     });
     button2.addEventListener("click", function(event){
         console.log("button clicked");
-        window.location.href="/SoccerNoid/sources/end.html";
+        window.location.href="./end.html";
      });
     //declare functions
 }
