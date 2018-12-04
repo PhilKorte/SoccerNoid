@@ -14,6 +14,12 @@
             <img src= "/SoccerNoid/sources/img/teams/GermanyPaddle.png" style="display: none;" id = "imgGermany" >
             <img src= "/SoccerNoid/sources/img/teams/ItalyPaddle.png" style="display: none;" id = "imgItaly" >
             <img src= "/SoccerNoid/sources/img/teams/TurkeyPaddle.png" style="display: none;" id = "imgTurkey" >
+
+            <audio id= "audiofile" preload="auto">
+            <source src="/SoccerNoid/sources/sounds/gameSound.wav" />
+            <source src="/SoccerNoid/sources/sounds/gameSound.mp3" />
+            <source src="/SoccerNoid/sources/sounds/gameSound.ogg" />
+                </audio>
             <canvas id= "ourPlayground"  > </canvas>
            
             
@@ -47,6 +53,7 @@ var directionY = 1;
 var rightPressed = false;
 var leftPressed = false;
 var spacePressed = false;
+var mPressed = false;
 var keyboardSpeed = 20;
 var board = document.getElementById("anzeigetafel");
 var user = JSON.parse(localStorage.getItem('userinitStorage')); 
@@ -55,8 +62,9 @@ var lvl = 1;
 var visitor; 
 var speed = 5;
 var interval1;
-
+var music = document.getElementById("audiofile");
 loadLevel(lvl);
+music.play();
 
 //board.innerHTML = "<p>"+user.name + " " + user.team+ "</p>";
 document.addEventListener("mousemove", mouseMoveHandler, false);
@@ -194,7 +202,16 @@ if(e.keyCode == 32){
         }, 30);
         spacePressed = true;
     }
-} 
+} if(e.keyCode == 77){
+    if(mPressed == false){
+    music.pause();
+    mPressed = true;
+    }else{
+        mPressed = false;
+        music.play();
+    }
+
+}
 
 }
 
