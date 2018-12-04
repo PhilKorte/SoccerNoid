@@ -52,6 +52,7 @@ var levelData;
 var lvl = 1;
 var visitor; 
 
+
 loadLevel(lvl);
 
 //board.innerHTML = "<p>"+user.name + " " + user.team+ "</p>";
@@ -181,10 +182,8 @@ if(e.keyCode == 32){
     spacePressed == true;
     
 }
-    
-}
-}
-
+    }
+        }
 
 function mouseMoveHandler(e) {
 var positionX = e.clientX - canvas.offsetLeft - paddleWidth/2;
