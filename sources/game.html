@@ -241,7 +241,7 @@ function drawPaddle(){
     var image = document.getElementById("imgTurkey");
     ctx.drawImage(image, paddleX,paddleY,paddleWidth,paddleHeight);
    
-}
+     }
 }
 
 function drawBall(){
@@ -249,11 +249,13 @@ function drawBall(){
    ctx.drawImage(image, ballX,ballY, 2*ballRadius,2*ballRadius);
    moveBall();              
 }
+            
 function drawText(){
     ctx.font = "18px Arial";
     ctx.fillStyle = "green";
     ctx.fillText("Mit Leertaste beginnen", canvas.width*0.4, canvas.height * 0.5);
 }
+
 function drawBricks(){
     var rows, cols;
     var fillColor = visitorColor(visitor);
