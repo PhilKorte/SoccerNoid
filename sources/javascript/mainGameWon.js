@@ -4,8 +4,10 @@ window.onload = function(){
     var button2 = document.getElementById("gameOverEndSite");
     var user = JSON.parse(localStorage.getItem("userexitStorage"));
     var userText = document.getElementById("userText");
+    var music = document.getElementById("audiofile");
 
     //logic
+    music.play();
     button1.addEventListener("click", function(event){
         console.log("button clicked");
         window.location.href="/SoccerNoid/sources/selectTeam.html";
@@ -16,4 +18,4 @@ window.onload = function(){
      });
     userText.innerHTML = "<p> Username:" + user.name + "<br> Team:" + user.team + "<br> Score:" + user.score + "</p>";
     //declare functions
-    }
+    } 
