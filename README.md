@@ -10,7 +10,7 @@ Datum der Abgabe: 04.12.2018
 
 **Browserkompatibilität**
 
-- Folgende Browser werden von SoccerNoid unterstützt: Internet Explorer, Mozilla Firefox, Google Chrome
+- Folgende Browser werden von SoccerNoid unterstützt: Internet Explorer, Mozilla Firefox, Google Chrome, Microsoft Edge
 
 **Spiel starten:**
 
@@ -18,7 +18,11 @@ Datum der Abgabe: 04.12.2018
 
 **Level Datei hinzufügen:**
 
-- 
+- Level Datei umbenennen in "level.json"
+
+- Die umbenannte Datei in den gewünschten Level Ordner verschieben
+
+- Die bereits vorhandene Level Datei vorübergehend umbenennen
 
 ## Spielanleitung
 
@@ -33,6 +37,8 @@ Datum der Abgabe: 04.12.2018
 - **linke Pfeiltaste:** Den Paddle nach links bewegen
 
 - **Leertaste:** Spiel starten/Ball bewegt sich
+
+- **M-Taste:** Musik im Spiel stummschalten
 
 
 ## Features
@@ -54,6 +60,46 @@ Datum der Abgabe: 04.12.2018
 
 ## Aufgabenaufteilung
 
+**Miray Atik:**
+
+- Spielfeld und Logik
+
+- GameWon Seite
+
+- Logo Entwurf
+
+- Musik finden und einbauen
+
+- Design
+
+- README.md
+
+- Tastenfunktionen
+
+**Phil Korte:**
+
+- Startseite
+
+- Gameover Seite
+
+- Highscore Seite + Funktion
+
+- Anzeigetafel
+
+- Level erstellt und eingebunden
+
+**Gemeinsam Erarbeitet:**
+
+- Collision Detection
+
+- Pitchslide
+
+- Bugfixes
+
+- Spieldesign (Paddle, Bricks)
+
+- Scores
+
 ## Lizenzen
 
 Dieses Projekt steht unter der MIT Lizenz.
@@ -64,9 +110,13 @@ Alle verwendeten Medien stehen unter der Creative Commons Lizenz
 
 Quellen der verwendeten Medien:
 
-- Bilder
+- Alle Bilder
 
 https://pixabay.com/de/
+
+- Alle Sounds
+
+https://freesound.org/
 
 
 
