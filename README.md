@@ -60,9 +60,9 @@ Datum der Abgabe: 04.12.2018
 - Dynamisches Hinzufügen der Levels
 
 
-## Bugs
+## Known Bugs
 
-- Ball prallt nicht immer korrekt ab 
+- Ball prallt in seltenen Situationen nicht korrekt ab 
 
 ## Aufgabenaufteilung
 

@@ -372,6 +372,18 @@ function collisionDetectionPaddle(){
             directionY *= -1;
         }
     }
+    if(ballY + 2*ballRadius >= py - speed && ballY + 2*ballRadius <= py){
+        if(ballX + 2*ballRadius >= px - speed && ballX + 2*ballRadius <= px){
+            directionY *= -1;
+            directionX *= -1;
+        }
+    }
+    if(ballY + 2* ballRadius >= py - speed && ballY + 2*ballRadius <= py){
+        if(ballX <= px + speed + pwidth && ballX >= px + pwidth){
+            directionY *= -1;
+            directionX *= -1;
+        }
+    }
 }
 function collisionDetectionWall(){
     if(ballX + 2*ballRadius >= canvas.width || ballX  <= 0){
@@ -409,7 +421,28 @@ function collisionDetectionBricks(){
                 console.log(levelData.positions[i][j]);
                 score = score + 100;
                 setScoreMiddle();
-            } }
+            } 
+            if(ballY + 2*ballRadius >= py - speed && ballY + 2*ballRadius <= py){
+        if(ballX + 2*ballRadius >= px - speed && ballX + 2*ballRadius <= px){
+            directionY *= -1;
+            directionX *= -1;
+            levelData.positions[i][j] += -1;
+                console.log(levelData.positions[i][j]);
+                score = score + 100;
+                setScoreMiddle();
+        }
+    }
+    if(ballY + 2* ballRadius >= py - speed && ballY + 2*ballRadius <= py){
+        if(ballX <= px + speed + pwidth && ballX >= px + pwidth){
+            directionY *= -1;
+            directionX *= -1;
+            levelData.positions[i][j] += -1;
+                console.log(levelData.positions[i][j]);
+                score = score + 100;
+                setScoreMiddle();
+        }
+    }
+        }
         }
     }
     if(levelFlag){
